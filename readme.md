@@ -245,8 +245,6 @@ brew install android-platform-tools
 🚀 **Stay tuned for future updates!** 🔥
 
 ---
-
-💡 *Built with passion by [Your Team Name] 🏆*
 ```
 RPM	   TPM	    RPD
 Gemini 2.0 Flash	15	1,000,000	1,500
