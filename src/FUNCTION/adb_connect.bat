@@ -1,30 +1,73 @@
-
 @echo off
-echo Disconnecting old connections...
+setlocal EnableDelayedExpansion
+
+:: Paths to store IPs
+set "ENV_PATH=.env"  
+set "IP_LIST_FILE=device_ips.txt"
+
+:: Check if ADB is installed
+adb version >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ❌ ADB is not installed. Please install ADB first.
+    exit /b 1
+)
+
+echo 🔌 Disconnecting old ADB connections...
 adb disconnect
-echo Setting up connected device
+
+echo 📡 Setting ADB to TCP/IP mode on port 5555...
 adb tcpip 5555
-echo Waiting for device to initialize
-timeout 3
-FOR /F "tokens=2" %%G IN ('adb shell ip addr show wlan0 ^|find "inet "') DO set ipfull=%%G
-FOR /F "tokens=1 delims=/" %%G in ("%ipfull%") DO set ip=%%G
-echo Connecting to device with IP %ip%...
-adb connect %ip%
 
-@echo off
+echo ⏳ Waiting for device to initialize...
+timeout /t 3 /nobreak >nul
 
-rem Set the IP address of your Android device
-set DEVICE_IP=192.0.0.4
+:: Get the device's IP address
+for /f "tokens=2 delims= " %%A in ('adb shell ip addr show wlan0 ^| findstr /R "inet "') do set IP_FULL=%%A
+for /f "delims=/" %%A in ("!IP_FULL!") do set IP=%%A
 
-rem Set the port number for ADB
-set ADB_PORT=5555
+adb kill-server
+adb start-server
 
-rem Set the path to the ADB executable
-set ADB_PATH="adb"
+:: Function to check and connect to ADB
+:connect_to_adb
+set "ip=%~1"
+echo 🔄 Checking connectivity for %ip%...
 
-rem Restart the ADB server
-%ADB_PATH% kill-server
-%ADB_PATH% start-server
+ping -n 1 -w 1000 %ip% >nul 2>&1
+if %errorlevel% equ 0 (
+    echo ✅ %ip% is reachable, attempting ADB connection...
+    adb connect %ip%:5555 >nul 2>&1
+    if %errorlevel% equ 0 (
+        echo ✅ Successfully connected to %ip%!
+        
+        findstr /x /c:"%ip%" "%IP_LIST_FILE%" >nul 2>&1 || (
+            echo %ip%>>"%IP_LIST_FILE%"
+            echo 📂 New IP saved in %IP_LIST_FILE%
+        )
+        exit /b 0
+    ) else (
+        echo ❌ ADB connection to %ip% failed.
+    )
+) else (
+    echo ⚠️ %ip% is unreachable, skipping...
+)
+exit /b 1
 
-rem Connect to the Android device over Wi-Fi
-%ADB_PATH% connect %DEVICE_IP%:%ADB_PORT%
+:: **Prioritized IP Checking**
+if not "%IP%"=="" call :connect_to_adb %IP% && exit /b 0
+
+if exist "%ENV_PATH%" (
+    echo ✅ Loading environment variables from %ENV_PATH%
+    for /f "delims=" %%A in (%ENV_PATH%) do set %%A
+    if not "%DEVICE_IP%"=="" call :connect_to_adb %DEVICE_IP% && exit /b 0
+) else (
+    echo ⚠️ .env file not found.
+)
+
+if exist "%IP_LIST_FILE%" (
+    echo 🔍 Checking stored IPs from %IP_LIST_FILE%...
+    for /f %%A in (%IP_LIST_FILE%) do call :connect_to_adb %%A && exit /b 0
+)
+
+echo ❌ No devices connected. Please check your network or try again.
+exit /b 1
