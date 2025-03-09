@@ -59,7 +59,7 @@ Before running the project, ensure you have the following installed:
    - [🧠 OLLAMA](https://ollama.com) - Download **Granite3.1-Dense:2b/8b** models from Ollama.
    - [🔮 GEMINI AI](https://ai.google.dev/) - API access for function execution.
 
-## Dirctory structure 
+## Directory structure 
 ```
 ├── DATA
 │   ├── KNOWLEDGEBASE
