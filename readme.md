@@ -59,6 +59,61 @@ Before running the project, ensure you have the following installed:
    - [🧠 OLLAMA](https://ollama.com) - Download **Granite3.1-Dense:2b/8b** models from Ollama.
    - [🔮 GEMINI AI](https://ai.google.dev/) - API access for function execution.
 
+## Dirctory structure 
+```
+├── DATA
+│   ├── KNOWLEDGEBASE
+│   │   └── disaster_data_converted.md
+│   ├── RAWKNOWLEDGEBASE
+│   │   └── disaster_data.pdf
+│   ├── email_schema.py
+│   ├── msg.py
+│   ├── phone_details.py
+│   ├── samples
+│   │   ├── share_func.py
+│   │   ├── tools.json
+│   │   └── tools_new.json
+│   └── tools.py
+├── device_ips.txt
+├── main.py
+├── readme.md
+├── requirements.txt
+└── src
+    ├── BRAIN
+    │   ├── RAG.py
+    │   ├── func_call.py
+    │   ├── gemini_llm.py
+    │   ├── lm_ai.py
+    │   └── text_to_info.py
+    ├── CONVERSATION
+    │   ├── speech_to_text.py
+    │   ├── t_s.py
+    │   ├── test_speech.py
+    │   └── text_to_speech.py
+    ├── FUNCTION
+    │   ├── Email_send.py
+    │   ├── adb_connect.bat
+    │   ├── adb_connect.sh
+    │   ├── app_op.py
+    │   ├── get_env.py
+    │   ├── greet_time.py
+    │   ├── incog.py
+    │   ├── internet_search.py
+    │   ├── link_op.py
+    │   ├── news.py
+    │   ├── phone_call.py
+    │   ├── random_respon.py
+    │   ├── run_function.py
+    │   ├── weather.py
+    │   └── youtube_downloader.py
+    ├── KEYBOARD
+    │   ├── key_lst.py
+    │   └── key_prs_lst.py
+    └── VISION
+        └── eye.py
+
+11 directories, 40 files
+```
 ---
 
 ## 💻 Installation
