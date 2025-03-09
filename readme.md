@@ -66,8 +66,8 @@ Before running the project, ensure you have the following installed:
 ### 1️⃣ **Clone the Repository**
 
 ```bash
- git clone https://github.com/ganeshnikhil/JARVIS.git
- cd JARVIS
+ git clone https://github.com/ganeshnikhil/J.A.R.V.I.S.2.0.git
+ cd J.A.R.V.I.S.2.0
 ```
 
 ### 2️⃣ **Install Dependencies**
