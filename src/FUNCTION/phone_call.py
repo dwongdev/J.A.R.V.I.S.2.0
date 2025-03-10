@@ -1,14 +1,21 @@
 from DATA.phone_details import PHONE_DIR
 import subprocess
-import os 
-from typing import Union
+from src.FUNCTION.get_env import check_os 
 
-PATH_ADB = "./src/FUNCTION/adb_connect.sh"
+L_PATH_ADB = "./src/FUNCTION/adb_connect.sh"
+W_PATH_ADB = "./src/FUNCTION/adb_connect.bat"
+
 
 def make_a_call(name: str) -> dict[str , bool] :
     """"make a phone call to provided contact name."""
     # Run ADB connection script
-    subprocess.run(['bash', PATH_ADB], check=True)
+    
+    os_name = check_os()
+    
+    if os_name == "Windows":
+        subprocess.run(W_PATH_ADB ,shell= True, check=True)
+    else:
+        subprocess.run(['bash', L_PATH_ADB], check=True)
 
     # Check if device is connected
     connected_devices = subprocess.run(['adb', 'devices'], capture_output=True, text=True)
