@@ -10,6 +10,7 @@ from src.FUNCTION.Email_send import send_email
 from src.FUNCTION.phone_call import make_a_call
 from src.BRAIN.RAG import chat_with_rag
 from src.FUNCTION.internet_search import duckgo_search
+from src.BRAIN.chat_with_ai import personal_chat_ai
 from typing import Union
 
 
@@ -28,7 +29,8 @@ FUNCTION_MAP = {
     'send_email':send_email,
     'make_a_call':make_a_call,
     'duckgo_search':duckgo_search,
-    'chat_with_rag':chat_with_rag
+    'chat_with_rag':chat_with_rag,
+    'personal_chat_ai':personal_chat_ai
 }
 
 
