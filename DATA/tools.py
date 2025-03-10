@@ -198,6 +198,17 @@ ALL_FUNCTIONS = {
             "description": "Download a YouTube video."
         },
         {
+            "name": "personal_chat_ai",
+            "description": "Engage in an empathetic conversation, recalling stored personal information. Use this for questions about the user's memories, goals, feelings, or identity, such as 'What is my name?' or 'Tell me a memory.' Ensure responses are contextually relevant.",
+            "parameters": {
+                "type": "OBJECT",
+                "properties": {
+                    "first_query": {"type": "STRING"}
+                },
+                "required": ["first_query"]
+            }
+        },
+        {
             "name": "send_to_ai",
             "description": "Handle creative prompts like jokes or stories.",
             "parameters": {
@@ -270,7 +281,7 @@ ALL_FUNCTIONS = {
         },
         {
             "name": "chat_with_rag",
-            "description": "For deeper and insightful discussions using (RAG).",
+            "description": "For deeper and insightful discussions on specific topic using (RAG).",
             "parameters": {
                 "type": "OBJECT",
                 "properties": {
