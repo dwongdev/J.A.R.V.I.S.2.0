@@ -69,10 +69,6 @@ Before running the project, ensure you have the following installed:
 │   ├── email_schema.py
 │   ├── msg.py
 │   ├── phone_details.py
-│   ├── samples
-│   │   ├── share_func.py
-│   │   ├── tools.json
-│   │   └── tools_new.json
 │   └── tools.py
 ├── device_ips.txt
 ├── main.py
