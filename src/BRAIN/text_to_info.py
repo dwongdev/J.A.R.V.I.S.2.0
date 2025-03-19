@@ -3,13 +3,14 @@
 
 import json 
 from langchain_ollama import ChatOllama
-
+from src.FUNCTION.get_env import load_variable
 #client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 
 
-def send_to_ai(prompt:str , max_token:int = 2000 , model:str = "granite3.1-dense:2b") -> str:
+def send_to_ai(prompt:str , max_token:int = 2000) -> str:
     """"Handle creative prompts like jokes or stories."""
+    model = load_variable("Text_to_info_model")
     try:
         llm = ChatOllama(
         model=model,
