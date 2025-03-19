@@ -315,3 +315,6 @@ The following table provides a comparison of various Gemini models with respect 
 - **TPM**: Tokens per minute  
 - **RPD**: Requests per day  
 
+```
+The focus of project is mostly on using small model and free (api)  models , get accurate agentic behaviours , to run these on low spec systems to.
+```
