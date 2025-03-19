@@ -3,11 +3,12 @@ from pathlib import Path
 from langchain_ollama import ChatOllama
 from langchain_ollama import OllamaEmbeddings
 from langchain_community.vectorstores import FAISS
+from src.FUNCTION.get_env import load_variable
 import math 
 
 HISTORY_FILE_PATH = "./DATA/chat_history.json"
-AI_MODEL = "granite3.1-dense:2b"
-EMBEDDING_MODEL = "nomic-embed-text"
+AI_MODEL = load_variable("Chat_model")
+EMBEDDING_MODEL = load_variable("Embeeding_model")
 SCORE_THRESHOLD = 0.4  # Adjust this threshold as needed
 
 
