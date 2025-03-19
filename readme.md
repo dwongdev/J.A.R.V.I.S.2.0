@@ -64,6 +64,42 @@ Before running the project, ensure you have the following installed:
       ```
    - [🔮 GEMINI AI](https://ai.google.dev/) - API access for function execution.
 
+## Model Details
+  # Gemma for intellignet routing and simple question answers.
+```
+  Model
+    architecture        gemma3    
+    parameters          4.3B      
+    context length      8192      
+    embedding length    2560      
+    quantization        Q4_K_M    
+
+  Parameters
+    stop           "<end_of_turn>"    
+    temperature    0.1                
+
+  License
+    Gemma Terms of Use                  
+    Last modified: February 21, 2024
+```
+  # grantie dense has large context window ,for rag and chat.
+```
+  Model
+    architecture        granite    
+    parameters          2.5B       
+    context length      131072     
+    embedding length    2048       
+    quantization        Q4_K_M     
+
+  System
+    Knowledge Cutoff Date: April 2024.    
+    You are Granite, developed by IBM.    
+
+  License
+    Apache License               
+    Version 2.0, January 2004
+```
+
 ## Directory structure 
 ```
 ├── DATA
