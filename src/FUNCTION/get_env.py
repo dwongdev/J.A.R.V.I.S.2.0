@@ -1,8 +1,14 @@
 from dotenv import load_dotenv
 from os import environ
 from typing import Union 
+import json
+import os
+import platform
+from fuzzywuzzy import process
 
 load_dotenv()
+
+APP_JSON_PATH = "./DATA/app.json"
 
 def load_variable(variable_name:str) -> Union[str , None]:
     try:
@@ -12,8 +18,139 @@ def load_variable(variable_name:str) -> Union[str , None]:
         print(f"Error:{e}")
     return None 
 
-import platform
 
 def check_os():
     os_name = platform.system()
     return os_name 
+
+def check_os() -> str:
+    """Check the operating system and return the name."""
+    os_name = platform.system()
+    if os_name == "Windows":
+        return "Windows"
+    elif os_name == "Darwin":
+        return "Darwin"
+    elif os_name == "Linux":
+        return "Linux"
+    else:
+        return "Unknown"
+
+def get_app_path(app_name, app_data):
+    """Retrieve app path with exact match and fuzzy matching."""
+    # ✅ Strip and lowercase app_name (just in case)
+    app_name = app_name.strip().lower()
+
+    # ✅ Check for exact match (since app_data is already normalized)
+    if app_name in app_data:
+        return app_data[app_name]
+
+    # ✅ Fuzzy match for closest name in normalized keys
+    closest_match, score = process.extractOne(app_name, app_data.keys())
+    
+    # ✅ Set a threshold for match confidence (e.g., 80)
+    if score >= 80:  # High confidence match
+        return app_data[closest_match]
+
+    # ❌ No match found
+    print(f"❌ Application '{app_name}' not found.")
+    return ""
+
+
+def load_app(app_name: str) -> str:
+    """Load the path of the application from app.json."""
+    if not os.path.exists(APP_JSON_PATH) or os.path.getsize(APP_JSON_PATH) == 0:
+        print("app.json is empty or does not exist. Fetching apps...")
+        update_app_list()
+
+    with open(APP_JSON_PATH, "r", encoding="utf-8") as f:
+        app_data = json.load(f)
+
+    return get_app_path(app_name , app_data)
+
+def update_app_list():
+    """Get the list of installed apps and store them in app.json."""
+    os_name = check_os()
+    apps = []
+
+    if os_name == "Windows":
+        apps = get_installed_apps_windows()
+    elif os_name == "Darwin":
+        apps = get_installed_apps_mac()
+    elif os_name == "Linux":
+        apps = get_installed_apps_linux()
+
+    # Store in app.json
+    app_dict = {app["name"].lower(): app["path"] for app in apps}
+    
+    with open(APP_JSON_PATH, "w", encoding="utf-8") as f:
+        json.dump(app_dict, f, indent=4)
+    
+    print(f"{len(app_dict)} applications found and stored in app.json.")
+
+
+def get_installed_apps_windows():
+    """Get installed applications on Windows."""
+    import winreg
+    apps = []
+    reg_paths = [
+        r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
+        r"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall",
+    ]
+    
+    for reg_path in reg_paths:
+        try:
+            reg_key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, reg_path)
+            for i in range(winreg.QueryInfoKey(reg_key)[0]):
+                try:
+                    subkey_name = winreg.EnumKey(reg_key, i)
+                    subkey = winreg.OpenKey(reg_key, subkey_name)
+                    name, _ = winreg.QueryValueEx(subkey, "DisplayName")
+                    path, _ = winreg.QueryValueEx(subkey, "InstallLocation")
+                    if name and path:
+                        apps.append({"name": name, "path": path})
+                except (FileNotFoundError, OSError, ValueError):
+                    continue
+        except FileNotFoundError:
+            continue
+    return apps
+
+
+def get_installed_apps_mac():
+    """Get installed applications on macOS."""
+    app_paths = [
+        "/Applications",
+        os.path.expanduser("~/Applications"),
+        "/System/Applications",  # System apps
+    ]
+    apps = []
+
+    for path in app_paths:
+        if os.path.exists(path):
+            for app in os.listdir(path):
+                if app.endswith(".app"):
+                    apps.append({"name": app.replace(".app", ""), "path": os.path.join(path, app)})
+
+    return apps
+
+
+def get_installed_apps_linux():
+    """Get installed applications on Linux."""
+    import glob
+    app_paths = ["/usr/share/applications", os.path.expanduser("~/.local/share/applications")]
+    apps = []
+
+    for path in app_paths:
+        if os.path.exists(path):
+            for file in glob.glob(f"{path}/*.desktop"):
+                with open(file, "r", encoding="utf-8", errors="ignore") as f:
+                    lines = f.readlines()
+                    name, exec_path = None, None
+                    for line in lines:
+                        if line.startswith("Name="):
+                            name = line.split("=", 1)[1].strip()
+                        elif line.startswith("Exec="):
+                            exec_path = line.split("=", 1)[1].strip()
+                    if name and exec_path:
+                        apps.append({"name": name, "path": exec_path.split()[0]})
+
+    return apps
