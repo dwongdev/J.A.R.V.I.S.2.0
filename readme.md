@@ -99,18 +99,16 @@ Before running the project, ensure you have the following installed:
     Apache License               
     Version 2.0, January 2004
 ```
-# gemini free teir for as fallback mechanism.
+# gemini free teir for as fallback mechanism . (only for tool calling)
 ```
-Model variant	Input(s)	Output	Optimized for
-
-gemini-2.0-flash	Audio, images, videos, and text	Text, images (experimental), and audio (coming soon)	Next generation features, speed, thinking, realtime streaming, and multimodal generation
-
-gemini-2.0-flash-lite	Audio, images, videos, and text	Text	A Gemini 2.0 Flash model optimized for cost efficiency and low latency
-
-gemini-2.0-pro-exp-02-05	Audio, images, videos, and text	Text	Our most powerful Gemini 2.0 model
-
-
-gemini-1.5-flash	Audio, images, videos, and text	Text	Fast and versatile performance across a diverse variety of tasks
+gemini-2.0-flash
+   Audio, images, videos, and text	Text, images (experimental), and audio (coming soon)	Next generation features, speed, thinking, realtime streaming, and     multimodal generation
+gemini-2.0-flash-lite
+   Audio, images, videos, and text	Text	A Gemini 2.0 Flash model optimized for cost efficiency and low latency
+gemini-2.0-pro-exp-02-05
+   Audio, images, videos, and text	Text	Our most powerful Gemini 2.0 model
+gemini-1.5-flash
+   Audio, images, videos, and text	Text	Fast and versatile performance across a diverse variety of tasks
 ```
 ## Directory structure 
 ```
