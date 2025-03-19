@@ -235,3 +235,5 @@ XlsxWriter==3.2.2
 yarl==1.18.3
 zipp==3.21.0
 zstandard==0.23.0
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.27.1
