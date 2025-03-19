@@ -50,13 +50,18 @@ Before running the project, ensure you have the following installed:
    Receiver_email=subject_email
    Password_email=email_password
    ```
-
 3. **Setup API Keys & Passwords**:
 
    - [🌩️ WEATHER API](https://rapidapi.com/weatherapi/api/weatherapi-com) - Get weather data.
    - [📰 NEWS API](https://newsapi.org) - Fetch latest news headlines.
    - [📧 GMAIL PASSWORD](https://myaccount.google.com/apppasswords) - Generate an app password for sending emails.
    - [🧠 OLLAMA](https://ollama.com) - Download **Granite3.1-Dense:2b/8b** models from Ollama.
+     **install Models from ollama**
+      ```
+       ollama run gemma3:4b
+       ollama run granite3.1-dense:2b
+       ollama pull nomic-embed-text
+      ```
    - [🔮 GEMINI AI](https://ai.google.dev/) - API access for function execution.
 
 ## Directory structure 
