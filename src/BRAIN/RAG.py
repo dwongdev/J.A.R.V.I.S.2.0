@@ -26,7 +26,7 @@ from langchain_ollama import OllamaEmbeddings, OllamaLLM
 from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-
+from src.FUNCTION.get_env import load_variable
 
 
 
@@ -116,12 +116,13 @@ def convert_document_to_markdown(doc_path , md_path) -> str:
         print(f"Error converting document: {doc_path}")
         return None 
 
-def setup_qa_chain(markdown_path: Path, embeddings_model_name:str = "nomic-embed-text:latest", model_name: str = "granite3.1-dense:2b"):
+def setup_qa_chain(markdown_path: Path):
 
     """Set up the QA chain for document processing"""
 
     # Load and split the document
-
+    embeddings_model_name = load_variable("Embeeding_model")
+    model_name = load_variable("Rag_model")
     loader = UnstructuredMarkdownLoader(str(markdown_path))
     documents = loader.load()
     text_splitter = RecursiveCharacterTextSplitter(
