@@ -4,6 +4,7 @@ import re
 from typing import  Union
 from langchain_ollama import ChatOllama
 from DATA.tools import ALL_FUNCTIONS 
+from src.FUNCTION.get_env import load_variable
 
 AVAILABLE_FUNCTION_NAMES_STRING = [func.get("name") for func in ALL_FUNCTIONS.get("tools")]
 
@@ -185,7 +186,8 @@ def parse_tool_calls(response: str) -> Union[list, None]:
         print(f"Unexpected error: \n{e}")
     return None
 
-def create_function_call(user_query:str , model="granite3.1-dense:2b")-> Union[str, None]:
+def create_function_call(user_query:str)-> Union[str, None]:
+    model = load_variable("Function_call_model")
     messages = [{"role":"system","content":SYSTEM_MESSAGE}, {"role": "user", "content": user_query}]
     # Example conversation
     try:
