@@ -1,7 +1,7 @@
 # 🚀 JARVIS 2.0
 
 ---
-
+## J.A.R.V.I.S. 2.0 – Judgment Augmented Reasoning for Virtual Intelligent Systems
 # 🤖 Jarvis AI Assistant
 
 Welcome to the **Jarvis AI Assistant** project! 🎙️ This AI-powered assistant can perform various tasks such as **providing weather reports 🌦️, summarizing news 📰, sending emails 📧** , **CAG** , and more, all through **voice commands**. Below, you'll find detailed instructions on how to set up, use, and interact with this assistant. 🎧
