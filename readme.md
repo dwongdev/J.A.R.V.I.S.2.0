@@ -247,13 +247,13 @@ brew install android-platform-tools
 
 ---
 ```
-RPM	   TPM	    RPD
-Gemini 2.0 Flash	15	1,000,000	1,500
-Gemini 2.0 Flash-Lite Preview	30	1,000,000	1,500
-Gemini 2.0 Pro Experimental 02-05	2	1,000,000	50
-Gemini 2.0 Flash Thinking Experimental 01-21	10	4,000,000	1,500
-Gemini 1.5 Flash	15	1,000,000	1,500
-Gemini 1.5 Flash-8B	15	1,000,000	1,500
-Gemini 1.5 Pro	2	32,000	50
+                                        RPM	              TPM	            RPD
+Gemini 2.0 Flash	                       15	            1,000,000	      1,500
+Gemini 2.0 Flash-Lite Preview	           30	            1,000,000	      1,500
+Gemini 2.0 Pro Experimental 02-05	     2	            1,000,000	      50
+Gemini 2.0 Flash Thinking Experimental 01-21	10	         4,000,000	      1,500
+Gemini 1.5 Flash	                       15	            1,000,000	      1,500
+Gemini 1.5 Flash-8B	                    15	            1,000,000	      1,500
+Gemini 1.5 Pro	                           2	            32,000	          50
 Imagen 3	--	--	--
 ```
