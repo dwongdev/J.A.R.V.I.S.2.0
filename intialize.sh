@@ -48,27 +48,39 @@ install_adb() {
 
 # Function to install PortAudio
 install_portaudio() {
-    if command_exists portaudio-config || command_exists pa_devs; then
-        echo "✅ PortAudio is already installed."
-    else
+    echo "🔍 Checking for PortAudio..."
+
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        if dpkg -l | grep -q "portaudio"; then
+            echo "✅ PortAudio is already installed."
+            return
+        fi
+
         echo "Installing PortAudio..."
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            if command_exists apt; then
-                sudo apt update && sudo apt install -y portaudio19-dev
-            elif command_exists pacman; then
-                sudo pacman -Sy --noconfirm portaudio
-            else
-                echo "❌ Unsupported package manager for PortAudio installation."
-                exit 1
-            fi
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-            brew install portaudio
+        if command_exists apt; then
+            sudo apt update && sudo apt install -y portaudio19-dev libportaudio2
+        elif command_exists pacman; then
+            sudo pacman -Sy --noconfirm portaudio
         else
-            echo "❌ Unsupported OS for PortAudio installation."
+            echo "❌ Unsupported package manager for PortAudio installation."
             exit 1
         fi
+
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        if brew list --formula | grep -q "^portaudio\$"; then
+            echo "✅ PortAudio is already installed."
+            return
+        fi
+
+        echo "Installing PortAudio..."
+        brew install portaudio
+
+    else
+        echo "❌ Unsupported OS for PortAudio installation."
+        exit 1
     fi
 }
+
 
 # Function to check and install Ollama models
 install_models() {
