@@ -3,7 +3,7 @@ from src.FUNCTION.weather import weather_report
 from src.FUNCTION.news import news_headlines
 from src.FUNCTION.youtube_downloader import yt_download
 from src.FUNCTION.app_op import app_runner
-from src.FUNCTION.link_op import search_youtube , open_github , open_instagram , open_youtube , yt_trending
+from src.FUNCTION.link_op import search_youtube , yt_trending
 from src.BRAIN.text_to_info import send_to_ai 
 from src.FUNCTION.incog import private_mode 
 from src.FUNCTION.Email_send import send_email
@@ -20,10 +20,6 @@ FUNCTION_MAP = {
     'news_headlines':news_headlines,
     'yt_download':yt_download,
     'app_runner':app_runner,
-    'open_github':open_github,
-    'open_instagram':open_instagram,
-    'open_youtube':open_youtube,
-    'yt_trending':yt_trending,
     'send_to_ai':send_to_ai,
     'private_mode':private_mode,
     'send_email':send_email,
