@@ -18,6 +18,7 @@ SYSTEM_MESSAGE = f"""You are an AI that determines the best function to call bas
 - Extract necessary arguments.
 - **Respond ONLY in valid JSON format** as follows:
 
+
 ```json
 [
    {{
@@ -43,13 +44,24 @@ Expected JSON Output:
 ]
 ```
 
+User Query: open chrome for me 
+Expected JSON Output:
+```json
+[
+   {{
+     "name": "app_runner",
+     "parameters": {{"app_name": "chrome"}}
+   }}
+]
+```
+
 User Query: Open YouTube.  
 Expected JSON Output:
 ```json
 [
    {{
-     "name": "open_youtube",
-     "parameters": {{}}
+     "name": "app_runner",
+     "parameters": {{"app_name":"youtube"}}
    }}
 ]
 ```
@@ -126,8 +138,8 @@ Expected JSON Output:
      "parameters": {{"exchange": "NASDAQ"}}
    }},
    {{
-     "name": "open_instagram",
-     "parameters": {{}}
+     "name": "app_runner",
+     "parameters": {{"app_name":"instagram"}}
    }}
 ]
 ```
