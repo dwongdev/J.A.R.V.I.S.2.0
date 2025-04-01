@@ -69,7 +69,7 @@ bash ./intialize.sh
        ollama run granite3.1-dense:2b
        ollama pull nomic-embed-text
       ```
-   - [portaudio] - download port audion to work with sound.
+   - [portaudio] - download portaudio to work with sound.
    - [🔮 GEMINI AI](https://ai.google.dev/) - API access for function execution.
 
 ## Model Details
