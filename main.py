@@ -72,7 +72,7 @@ def process_command(command:str) -> None:
         print(f"Calling : {response_dic}")
         if response_dic:
             func_name = response_dic["name"]
-            prompt = f"Generate a polite loading message for the function '{func_name}' less than 20 words."
+            prompt = f"Generate a polite and concise loading message for the function '{func_name}' in less than 20 words. Provide only one message with no extra information or explanation."
             #"Generate a polite loading message for the function '{open_youtube}' less than 20 words.
             loading_message = send_to_ai(prompt)
             speak(loading_message)
