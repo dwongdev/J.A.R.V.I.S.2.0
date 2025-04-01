@@ -3,7 +3,7 @@ from src.FUNCTION.weather import weather_report
 from src.FUNCTION.news import news_headlines
 from src.FUNCTION.youtube_downloader import yt_download
 from src.FUNCTION.app_op import app_runner
-from src.FUNCTION.link_op import search_youtube , yt_trending
+from src.FUNCTION.link_op import search_youtube
 from src.BRAIN.text_to_info import send_to_ai 
 from src.FUNCTION.incog import private_mode 
 from src.FUNCTION.Email_send import send_email
