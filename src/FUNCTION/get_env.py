@@ -5,6 +5,8 @@ import json
 import os
 import platform
 from fuzzywuzzy import process
+from DATA.Domain import websites 
+import shutil
 
 load_dotenv()
 
@@ -34,6 +36,38 @@ def check_os() -> str:
         return "Linux"
     else:
         return "Unknown"
+        
+def is_app_installed(path:str) -> bool:
+    """Check if an application is installed by verifying its path."""
+    
+    # Check if it's in the system PATH (for built-in apps like Notepad, Calculator)
+    if shutil.which(path):
+        return True
+    
+    # Check if the direct path exists (for installed applications)
+    return os.path.exists(path)
+
+
+def get_url(website_name: str) -> str:
+    """Retrieve website URL with exact or fuzzy matching."""
+    if not website_name:
+        print("❌ Website name cannot be empty.")
+        return ""
+
+    # Normalize input
+    website_name = website_name.strip().lower()
+
+    # Exact match
+    if website_name in websites:
+        return websites[website_name]
+
+    # Fuzzy matching
+    closest_match, score = process.extractOne(website_name, websites.keys())
+    if score >= 80:
+        return websites[closest_match]
+
+    print(f"❌ Website '{website_name}' not found.")
+    return ""
 
 def get_app_path(app_name, app_data):
     """Retrieve app path with exact match and fuzzy matching."""
@@ -41,18 +75,24 @@ def get_app_path(app_name, app_data):
     app_name = app_name.strip().lower()
 
     # ✅ Check for exact match (since app_data is already normalized)
-    if app_name in app_data:
-        return app_data[app_name]
+    if app_name in app_data and is_app_installed(app_name.get(app_name)):
+        return app_data.get(app_name)
 
     # ✅ Fuzzy match for closest name in normalized keys
     closest_match, score = process.extractOne(app_name, app_data.keys())
     
     # ✅ Set a threshold for match confidence (e.g., 80)
-    if score >= 80:  # High confidence match
+    if score >= 80 and is_app_installed(closest_match):  # High confidence match
         return app_data[closest_match]
-
+    
+    # if no app found , fallback to website search 
+    link = get_url(app_name)
+    if link:
+        return link
+    
+        
     # ❌ No match found
-    print(f"❌ Application '{app_name}' not found.")
+    print(f"❌ Application or web '{app_name}' not found.")
     return ""
 
 
