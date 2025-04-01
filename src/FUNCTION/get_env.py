@@ -75,7 +75,7 @@ def get_app_path(app_name, app_data):
     app_name = app_name.strip().lower()
 
     # ✅ Check for exact match (since app_data is already normalized)
-    if app_name in app_data and is_app_installed(app_name.get(app_name)):
+    if app_name in app_data and is_app_installed(app_data.get(app_name)):
         return app_data.get(app_name)
 
     # ✅ Fuzzy match for closest name in normalized keys
