@@ -11,6 +11,7 @@ from src.FUNCTION.phone_call import make_a_call
 from src.BRAIN.RAG import chat_with_rag
 from src.FUNCTION.internet_search import duckgo_search
 from src.BRAIN.chat_with_ai import personal_chat_ai
+from src.BRAIN.code_gen import data_analysis
 from typing import Union
 
 
@@ -26,7 +27,8 @@ FUNCTION_MAP = {
     'make_a_call':make_a_call,
     'duckgo_search':duckgo_search,
     'chat_with_rag':chat_with_rag,
-    'personal_chat_ai':personal_chat_ai
+    'personal_chat_ai':personal_chat_ai,
+    'data_analysis':data_analysis
 }
 
 
@@ -47,6 +49,7 @@ def execute_function_call(function_call: dict) -> Union[None,dict,list]:
         
         if not func_name:
             return  output
+        
         
         func = FUNCTION_MAP.get(func_name)
         
