@@ -1,7 +1,7 @@
 import time
 from src.FUNCTION.run_function import execute_function_call
 from src.BRAIN.text_to_info import send_to_ai
-from src.BRAIN.func_call import create_function_call, parse_tool_calls
+from testing.src.BRAIN.local_func_call import create_function_call 
 from src.CONVERSATION.speech_to_text import recognize_speech
 from src.CONVERSATION.text_to_speech import speak
 from src.FUNCTION.random_respon import random_choice
@@ -9,7 +9,7 @@ from src.FUNCTION.greet_time import time_of_day
 from src.FUNCTION.Email_send import initate_email 
 from DATA.msg import WELCOME_RESPONSES, END_RESPONSES, LISTENING_RESPONSES, NONLISTENING_RESPONSES
 from src.FUNCTION.phone_call import call_phone
-from src.BRAIN.gemini_llm import gem_generate_fuction_calls
+from src.BRAIN.gem_func_call import gem_generate_fuction_calls
 from typing import Union
 
 
