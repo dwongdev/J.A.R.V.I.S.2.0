@@ -121,6 +121,17 @@
                 },
                 "required": ["subject"]
             }
+        },
+        {
+            "name": "data_analysis",
+            "description": "Perform data analysis on the loaded CSV file using Python with pandas, numpy, and matplotlib based on the user's specific analytical request.",
+            "parameters": {
+                "type": "OBJECT",
+                "properties": {
+                    "user_query": {"type": "STRING", "description": "User's query for specific analysis (e.g., 'average', 'sum', 'map')."}
+                },
+                "required": ["user_query"]
+            }
         }
     ]
 }
