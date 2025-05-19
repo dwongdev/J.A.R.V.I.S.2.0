@@ -1,0 +1,51 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore data and local storage
+DATA/
+*.pkl
+*.db
+*.sqlite3
+*.csv
+*.json
+
+# Ignore backups and test outputs
+Backup/
+Test/
+
+# Ignore secrets and config
+*.env
+*.yml
+*.sh
+*.bat
+device_ips.txt
+adb.txt
+
+# Ignore VSCode and JetBrains IDE settings
+.vscode/
+.idea/
+
+# Ignore vectorstores and models
+**/VECTORSTORES/
+*.faiss
+*.pkl
+
+# Ignore OS-generated files
+ehthumbs.db
+Icon?
+DATA/
