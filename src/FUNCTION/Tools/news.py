@@ -1,35 +1,3 @@
-# import requests
-# from src.FUNCTION.Tools.get_env import load_variable
-# from typing import Union
-# # in , us 
-# def news_headlines(top:int = 10) -> Union[list[str] , None]:
-#     """Fetch top news headlines."""
-#     api_key = load_variable("News_api")
-#     country = "india"
-#     headlines = []
-#     url = ('https://newsapi.org/v2/top-headlines?'
-#         f'q={country}&from=2025-04-03&to=2025-04-03&sortBy=popularity&'
-#         f'apiKey={api_key}')
-#     try:
-#         response = requests.get(url).json()
-#         all_articles = response['articles']
-#         total_results = int(response['totalResults'])
-        
-#         for i in range(min(top , total_results)):
-#             headline = all_articles[i]['title']
-#             headlines.append(headline)
-#         return "\n".join(headlines)
-#     except Exception as e:
-#         print(e)
-#         pass
-#     return None 
-
-
-
-#....
-
-
-
 import requests
 from src.FUNCTION.Tools.get_env import EnvManager
 from typing import Union
