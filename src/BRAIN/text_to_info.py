@@ -1,32 +1,3 @@
-
-# from langchain_ollama import ChatOllama
-# from src.FUNCTION.Tools.get_env import load_variable
-
-
-
-# def send_to_ai(prompt:str , max_token:int = 2000) -> str:
-#     """"Handle creative prompts like jokes or stories."""
-#     model = load_variable("Text_to_info_model")
-#     try:
-#         llm = ChatOllama(
-#         model=model,
-#         temperature=0.3,
-#         max_token = max_token
-#         )
-#         messages = [
-#             {"role": "system", "content": "You are an intelligent AI system. Understand the user Query carefully and provide the most relevant Answer."},
-#             {"role": "user", "content": str(prompt)}
-#         ]
-
-#         response = llm.invoke(messages)
-#         return response.content 
-
-#     except Exception as e:
-#         print(f"An error occurred: {e}")
-
-
-#...
-
 from langchain_ollama import ChatOllama
 from src.FUNCTION.Tools.get_env import EnvManager
 
