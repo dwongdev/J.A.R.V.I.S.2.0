@@ -118,61 +118,7 @@ gemini-2.0-pro-exp-02-05
 gemini-1.5-flash
    Audio, images, videos, and text	Text	Fast and versatile performance across a diverse variety of tasks
 ```
-## Directory structure 
-```
-├── DATA
-│   ├── KNOWLEDGEBASE
-│   │   └── disaster_data_converted.md
-│   ├── RAWKNOWLEDGEBASE
-│   │   └── disaster_data.pdf
-│   ├── email_schema.py
-│   ├── msg.py
-│   ├── phone_details.py
-│   └── tools.py
-├── device_ips.txt
-├── main.py
-├── readme.md
-├── requirements.txt
-└── src
-    ├── BRAIN
-    │   ├── RAG.py
-    │   ├── func_call.py
-    │   ├── gemini_llm.py
-    │   ├── lm_ai.py
-    │   └── text_to_info.py
-    ├── CONVERSATION
-    │   ├── speech_to_text.py
-    │   ├── t_s.py
-    │   ├── test_speech.py
-    │   └── text_to_speech.py
-    ├── FUNCTION
-    │   ├── Email_send.py
-    │   ├── adb_connect.bat
-    │   ├── adb_connect.sh
-    │   ├── app_op.py
-    │   ├── get_env.py
-    │   ├── greet_time.py
-    │   ├── incog.py
-    │   ├── internet_search.py
-    │   ├── link_op.py
-    │   ├── news.py
-    │   ├── phone_call.py
-    │   ├── random_respon.py
-    │   ├── run_function.py
-    │   ├── weather.py
-    │   └── youtube_downloader.py
-    ├── KEYBOARD
-    │   ├── key_lst.py
-    │   └── key_prs_lst.py
-    └── VISION
-        └── eye.py
-
-11 directories, 40 files
-```
----
-
 ![JARVIS Screenshot](image.png)
-
 
 ## 💻 Installation
 
