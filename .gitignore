@@ -4,7 +4,7 @@ __pycache__/
 *.so
 
 # Ignore virtual environments
-venv/
+.venv/
 env/
 .env/
 # Ignore logs and temporary files
