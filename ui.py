@@ -212,8 +212,8 @@ if user_input := st.chat_input("Ask me anything... "):
         response = personal_chat_ai(user_input)
     elif st.session_state.chat_mode == "chat_with_rag":
         subject = st.session_state.rag_subject
-        if user_input:###
-            with st.spinner("Thinking..."): #####
+        if user_input:
+            with st.spinner("Thinking..."):
                 response = chat_with_rag_session(subject, user_input) if subject else "🚨 Please enter a subject."
                 
     elif st.session_state.chat_mode == "data_analysis":
