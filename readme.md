@@ -142,13 +142,7 @@ gemini-1.5-flash
 ### **Start the Program**
 
 ```bash
- python main.py
-```
-
-📢 **Initial Interaction**:
-
-```plaintext
-[= =] Say 'hey jarvis' to activate, and 'stop' to deactivate. Say 'exit' to quit.
+ streamlit run ui.py
 ```
 
 ---
@@ -161,46 +155,6 @@ gemini-1.5-flash
 
 🔹 **AI Model Used**: **Gemini AI** 🧠\
 ✅ Higher accuracy ✅ Structured data processing ✅ Reliable AI-driven interactions
-
-📌 **Command Parsing** 📜
-
-```python
-response = gemini_generate_function_call(command)
-response_dic = parse_tool_call(response)
-```
-
-📌 **Dynamic Function Execution** 🔄
-
-```python
-if response_dic:
-    func_name = response_dic["name"]
-    response = execute_function_call(response_dic)
-```
-
-📌 **Error Handling & Fallback to Ollama** 🛑
-
-```python
-try:
-    response = execute_function_call(response_dic)
-except Exception as e:
-    print(f"Error in Gemini AI function execution: {e}")
-    print("Falling back to Ollama-based function execution...")
-    response = ollama_generate_function_call(command)
-```
-
-📌 **Retry Mechanism** 🔄
-
-```python
-def send_to_ai_with_retry(prompt, retries=3, delay=2):
-    for _ in range(retries):
-        try:
-            return send_to_gemini(prompt)
-        except Exception:
-            time.sleep(delay)
-    print("Gemini AI is not responding. Switching to Ollama...")
-    return send_to_ollama(prompt)
-```
-
 ---
 
 ## 📖 **RAG-Based Knowledge System**
