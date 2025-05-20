@@ -10,20 +10,22 @@ Welcome to the **Jarvis AI Assistant** project! 🎙️ This AI-powered assistan
 
 ## 🌟 Features
 
-✅ **Voice Activation**: Say **"Hey Jarvis"** to activate listening mode. 🎤\
+✅ **Voice Activation**: activate listening mode. 🎤\
 ✅ **Speech Recognition**: Recognizes and processes user commands via speech input. 🗣️\
 ✅ **AI Responses**: Provides responses using AI-generated **text-to-speech** output. 🎶\
 ✅ **Task Execution**: Handles multiple tasks, including:
 
 - 📧 **Sending emails**
 - 🌦️ **Summarizing weather reports**
+- 📊 **Data Analysis using csv***
+- 🧑🏻‍💻 **Pesonalize chat**
 - 📰 **Reading news headlines**
 - 🖼️ **Image generation**
 - 🏦 **Database functions**
 - 📱 **Phone call automation using ADB**
 - 🤖 **AI-based task execution**
 - 📡 **Automate websites & applications**
-- 🧠 **Retrieval-Augmented Generation (RAG) for knowledge-based interactions**
+- 🧠 **Retrieval-Augmented Generation (RAG) for knowledge-based interactions on various topics**
 - ✅ **Timeout Handling**: Automatically deactivates listening mode after **5 minutes** of inactivity. ⏳
 - ✅ **Automatic Input Processing**: If no "stop" command is detected within **60 seconds**, input is finalized and sent to the AI model for processing. ⚙️
 - ✅ **Multiple Function Calls**: Call **multiple functions simultaneously**, even if their inputs and outputs are unrelated. 🔄
