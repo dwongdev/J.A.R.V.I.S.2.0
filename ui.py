@@ -156,7 +156,6 @@ def add_message(role, content):
     if not any(msg["content"] == content and msg["role"] == role for msg in history):
         history.append({"role": role, "content": content})
 
-
 # ---------------- Sidebar & Mode Selector ---------------------
 st.sidebar.markdown("### 🔁 Select Chat Mode")
 
@@ -186,7 +185,7 @@ if st.session_state.chat_mode == "data_analysis":
     st.sidebar.markdown("### 📤 Upload CSV File")
     uploaded_file = st.sidebar.file_uploader("Choose a CSV file", type=["csv"])
 
-    if uploaded_file:
+    if uploaded_file and uploaded_file.name != os.path.basename(st.session_state.uploaded_file_path or ""):
         file_path = os.path.join(UPLOAD_DIR, uploaded_file.name)
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
@@ -243,7 +242,9 @@ if user_input := st.chat_input("Ask me anything... "):
         add_message("assistant", response)
 
     if st.session_state.voice_output:
-        audio_io = text_to_speech_local(str(response).replace("*", ""))
+        # combined multiple outputs , else single one
+        full_response = "\n".join([sub_response.get("output", "") for sub_response in response]) if isinstance(response, list) else str(response)
+        audio_io = text_to_speech_local(str(full_response).replace("*", ""))
         st.markdown(f"""
             <audio autoplay="true">
                 <source src="data:audio/mp3;base64,{audio_io}" type="audio/mp3">
