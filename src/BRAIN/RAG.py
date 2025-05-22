@@ -1,4 +1,3 @@
-
 import os
 import shutil
 import tempfile
@@ -12,15 +11,18 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings, OllamaLLM
 from langchain_community.vectorstores import FAISS
 from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationBufferMemory
-
+from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_community.chat_message_histories.in_memory import ChatMessageHistory
 from src.FUNCTION.Tools.get_env import EnvManager
+
 
 class RAGPipeline:
     def __init__(self):
         self.embedding_model = EnvManager.load_variable("Embedding_model")
         self.rag_model = EnvManager.load_variable("Rag_model")
+        self.MAX_MESSAGES_PER_SESSION = 20
         self.qa_chain = None
+        self.memory_store = {}  # In-memory store for session memory
 
     def get_paths(self, subject: str):
         subject_clean = subject.lower().strip().replace(" ", "_")
@@ -104,6 +106,19 @@ class RAGPipeline:
             print(f"[Vectorstore Error] {e}")
             return None
 
+    def get_memory(self, session_id: str):
+        if session_id not in self.memory_store:
+            self.memory_store[session_id] = ChatMessageHistory()
+
+        history = self.memory_store[session_id]
+
+        # Auto-reset memory if too long
+        if len(history.messages) > self.MAX_MESSAGES_PER_SESSION:
+            print(f"[INFO] Memory for session '{session_id}' exceeded {MAX_MESSAGES_PER_SESSION} messages. Resetting.")
+            history.clear()
+
+        return history
+    
     def setup_chain(self, subject: str):
         try:
             _, md_path, _ = self.get_paths(subject)
@@ -117,30 +132,35 @@ class RAGPipeline:
                 return None
 
             llm = OllamaLLM(model=self.rag_model, temperature=0)
-            memory = ConversationBufferMemory(memory_key="chat_history", output_key="answer", return_messages=True)
 
-            self.qa_chain = ConversationalRetrievalChain.from_llm(
+            base_chain = ConversationalRetrievalChain.from_llm(
                 llm=llm,
                 retriever=vectorstore.as_retriever(search_kwargs={"k": 2}),
-                memory=memory,
                 return_source_documents=False
+            )
+
+            self.qa_chain = RunnableWithMessageHistory(
+                base_chain,
+                get_session_history=self.get_memory,
+                input_messages_key="question",
+                history_messages_key="chat_history"
             )
             return self.qa_chain
         except Exception as e:
             print(f"[QA Chain Error] {e}")
             return None
 
-    def ask(self, qa_chain , question: str) -> str:
+    def ask(self, qa_chain, question: str, session_id: str = "default") -> str:
         if not qa_chain:
             print("QA chain not initialized.")
             return "No QA chain available."
         try:
-            result = qa_chain.invoke({"question": question})
+            result = qa_chain.invoke({"question": question}, config={"configurable": {"session_id": session_id}})
             return result.get("answer", "No answer found.")
         except Exception as e:
             return f"Error: {e}"
 
-    def interactive_chat(self , subject:str):
+    def interactive_chat(self, subject: str):
         if not self.setup_chain(subject):
             print("Could not set up RAG chain.")
             return
@@ -150,10 +170,9 @@ class RAGPipeline:
             if question.lower() in {"exit", "quit", "bye"}:
                 print("Goodbye!")
                 break
-            print("AI:", self.ask(question))
+            print("AI:", self.ask(self.qa_chain, question, session_id="default"))
 
 
 if __name__ == "__main__":
     rag = RAGPipeline()
-    rag.interactive_chat()
-
+    rag.interactive_chat(subject="Disaster")  # Replace with your actual subject
