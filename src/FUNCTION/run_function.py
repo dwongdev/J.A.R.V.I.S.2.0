@@ -9,7 +9,7 @@ from src.FUNCTION.Tools.Email_send import send_email
 from src.FUNCTION.Tools.phone_call import make_a_call
 from src.FUNCTION.Tools.internet_search import duckgo_search
 from typing import Union
-
+import datetime
 
 class FunctionExecutor:
     def __init__(self):
@@ -63,5 +63,6 @@ class FunctionExecutor:
             "status": "success" if output is not None else "failed",
             "function_name": func_name,
             "args": args,
-            "output": output
+            "output": output,
+            "timestamp": datetime.now().isoformat() + "Z"
         }
