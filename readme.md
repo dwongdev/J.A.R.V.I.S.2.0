@@ -45,7 +45,7 @@ Before running the project, ensure you have the following installed:
 
 2. **Add your API keys and other configuration variables** to the `.env` file:
 
-   ```dotenv
+```dotenv
   author_name="ganeshnikhil124@gmail.com"
   weather_link="https://rapidapi.com/weatherapi/api/weatherapi-com"
   news_link="https://newsapi.org"
