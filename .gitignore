@@ -1,34 +1,14 @@
-# Ignore Python cache
+# Python cache
 __pycache__/
 *.py[cod]
 *.so
 
-# Ignore virtual environments
+# Virtual environments
 .venv/
 env/
-.env/
-# Ignore logs and temporary files
-*.log
-*.tmp
-*.swp
 
-# Ignore system files
-.DS_Store
-Thumbs.db
-
-# Ignore data and local storage
-DATA/
-*.pkl
-*.db
-*.sqlite3
-*.csv
-*.json
-
-# Ignore backups and test outputs
-Backup/
-Test/
-
-# Ignore secrets and config
+# Secrets & configs
+.env
 *.env
 *.yml
 *.sh
@@ -36,16 +16,54 @@ Test/
 device_ips.txt
 adb.txt
 
-# Ignore VSCode and JetBrains IDE settings
+# Logs & temporary files
+*.log
+*.tmp
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# Data & storage
+DATA/
+*.pkl
+*.db
+*.sqlite3
+*.csv
+*.json
+**/VECTORSTORES/
+*.faiss
+
+# Backups & test outputs
+Backup/
+Test/
+
+# IDEs
 .vscode/
 .idea/
 
-# Ignore vectorstores and models
-**/VECTORSTORES/
-*.faiss
-*.pkl
+# Media (test/generated files)
+*.mp3
+*.wav
+*.mp4
+*.m4a
+*.png
+*.jpg
+*.jpeg
+*.gif
 
-# Ignore OS-generated files
-ehthumbs.db
-Icon?
-DATA/
+# Packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.cache/

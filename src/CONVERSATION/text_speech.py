@@ -5,7 +5,7 @@ from io import BytesIO
 import tempfile
 import os
 import base64
-
+import io
 
 def text_to_speech_local(text, lang="en"):
     """Converts text to speech using gTTS and streams audio to the browser."""
@@ -26,10 +26,12 @@ def text_to_speech_local(text, lang="en"):
     
     # Delete the temporary file after reading
     os.remove(audio_path)
-    
+
+
     audio_base64 = base64.b64encode(audio_bytes).decode('utf-8')
 
-    return audio_base64
+    return audio_base64 
+
 
 
 if __name__ == "__main__":
