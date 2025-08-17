@@ -46,12 +46,27 @@ Before running the project, ensure you have the following installed:
 2. **Add your API keys and other configuration variables** to the `.env` file:
 
    ```dotenv
-   Weather_api=your_weather_api_key
-   News_api=your_news_api_key
-   Sender_email=your_email
-   Receiver_email=subject_email
-   Password_email=email_password
-   ```
+  author_name="ganeshnikhil124@gmail.com"
+  weather_link="https://rapidapi.com/weatherapi/api/weatherapi-com"
+  news_link="https://newsapi.org"
+  name="ganeshnikhil"
+  Rag_model="granite3.1-dense:2b"
+  Chat_model="granite3.1-dense:2b"
+  Function_call_model="gemma3:4b"
+  Text_to_info_model="gemma3:4b"
+  Embedding_model="nomic-embed-text"
+  genai_key=""
+  Sender_email="ganeshnikhil124@gmail.com"
+  Receiver_email=""
+  Password_email=""
+  Weather_api=""
+  News_api=""
+  Country="in"
+  DEVICE_IP=""
+  CSV_PATH="./DATA/business-employment-data-dec-2024-quarter.csv"
+  UI="on"
+  Yt_path="./DATA/youtube_video/"
+```
 2 . Install system requriements 
 
 ```install
@@ -121,6 +136,7 @@ gemini-1.5-flash
    Audio, images, videos, and text	Text	Fast and versatile performance across a diverse variety of tasks
 ```
 ![JARVIS Screenshot](image.png)
+---------------------------------------------------------------------------------------------
 ![Digram](dig.png)
 ## 💻 Installation
 
