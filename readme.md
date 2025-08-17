@@ -121,7 +121,7 @@ gemini-1.5-flash
    Audio, images, videos, and text	Text	Fast and versatile performance across a diverse variety of tasks
 ```
 ![JARVIS Screenshot](image.png)
-
+![Digram](dig.png)
 ## 💻 Installation
 
 ### 1️⃣ **Clone the Repository**
