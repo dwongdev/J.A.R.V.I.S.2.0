@@ -25,6 +25,9 @@ Welcome to the **Jarvis AI Assistant** project! 🎙️ This AI-powered assistan
 - 📱 **Phone call automation using ADB**
 - 🤖 **AI-based task execution**
 - 📡 **Automate websites & applications**
+- 🏞️ **Image processing Using gemini** 
+# "Image Source", ["Upload", "URL", "Camera"]
+# "Select Action", ["Basic Detection", "Object Detection", "Segmentation","Resize"]
 - 🧠 **Retrieval-Augmented Generation (RAG) for knowledge-based interactions on various topics**
 - ✅ **Timeout Handling**: Automatically deactivates listening mode after **5 minutes** of inactivity. ⏳
 - ✅ **Automatic Input Processing**: If no "stop" command is detected within **60 seconds**, input is finalized and sent to the AI model for processing. ⚙️
