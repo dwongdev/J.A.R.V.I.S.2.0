@@ -98,7 +98,7 @@ bash ./intialize.sh
        ollama run granite3.1-dense:2b
        ollama pull nomic-embed-text
       ```
-   - [portaudio] - download portaudio to work with sound.
+   - [portaudio](https://files.portaudio.com/download.html) - download portaudio to work with sound.
    - [🔮 GEMINI AI](https://aistudio.google.com/apikey) - API access for function execution.
 
 ## Model Details
