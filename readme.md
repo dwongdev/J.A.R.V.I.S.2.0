@@ -27,12 +27,12 @@ Welcome to the **Jarvis AI Assistant** project! 🎙️ This AI-powered assistan
 - 📡 **Automate websites & applications**
 - 🏞️ **Image processing Using gemini** 
 
-     **Image Source**
+     **Image Source:**
       ***Upload***
       ***URL***
       ***Camera***
 
-    **Select Action**
+    **Select Action:**
       ***Basic Detection***
       ***Object Detection***
       ***Segmentation***
