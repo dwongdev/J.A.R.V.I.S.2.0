@@ -149,7 +149,7 @@ gemini-1.5-flash
 ```
 ![JARVIS Screenshot](image.png)
 ---------------------------------------------------------------------------------------------
-![Digram](dig.png)
+![alt text](dig.png)
 ## 💻 Installation
 
 ### 1️⃣ **Clone the Repository**
