@@ -8,6 +8,8 @@ import numpy as np
 from PIL import Image, ImageDraw
 from google import genai
 from src.FUNCTION.Tools.get_env import EnvManager
+import re 
+
 
 class ImageProcessor:
     def __init__(self, image_path="captured_image.png", model_name="gemini-2.5-flash"):
@@ -94,61 +96,6 @@ class ImageProcessor:
         except Exception as e:
             print(f"Error: {e}")
             return None
-
-    # ---------- Segmentation ----------
-    # def extract_segmentation_masks(self, prompt=None, output_dir="segmentation_outputs"):
-    #     try:
-    #         image = Image.open(self.image_path)
-    #         image.thumbnail([1024, 1024], Image.Resampling.LANCZOS)
-    #         prompt = prompt or "Give segmentation masks for prominent items."
-
-    #         config = genai.types.GenerateContentConfig(
-    #             thinking_config=genai.types.ThinkingConfig(thinking_budget=0)
-    #         )
-
-    #         response = self.client.models.generate_content(
-    #             model=self.model,
-    #             contents=[prompt, image],
-    #             config=config
-    #         )
-
-    #         items = json.loads(self._parse_json(response.text))
-    #         os.makedirs(output_dir, exist_ok=True)
-
-    #         for i, item in enumerate(items):
-    #             y0, x0, y1, x1 = item["box_2d"]
-    #             y0 = int(y0 / 1000 * image.size[1])
-    #             x0 = int(x0 / 1000 * image.size[0])
-    #             y1 = int(y1 / 1000 * image.size[1])
-    #             x1 = int(x1 / 1000 * image.size[0])
-    #             if y0 >= y1 or x0 >= x1:
-    #                 continue
-
-    #             png_str = item["mask"]
-    #             if not png_str.startswith("data:image/png;base64,"):
-    #                 continue
-    #             png_str = png_str.removeprefix("data:image/png;base64,")
-    #             mask_data = base64.b64decode(png_str)
-    #             mask = Image.open(io.BytesIO(mask_data)).resize((x1-x0, y1-y0), Image.Resampling.BILINEAR)
-
-    #             overlay = Image.new('RGBA', image.size, (0, 0, 0, 0))
-    #             overlay_draw = ImageDraw.Draw(overlay)
-    #             mask_array = np.array(mask)
-    #             color = (255, 255, 255, 200)
-    #             for y in range(y0, y1):
-    #                 for x in range(x0, x1):
-    #                     if mask_array[y - y0, x - x0] > 128:
-    #                         overlay_draw.point((x, y), fill=color)
-
-    #             mask_filename = f"{item['label']}_{i}_mask.png"
-    #             overlay_filename = f"{item['label']}_{i}_overlay.png"
-    #             mask.save(os.path.join(output_dir, mask_filename))
-    #             composite = Image.alpha_composite(image.convert('RGBA'), overlay)
-    #             composite.save(os.path.join(output_dir, overlay_filename))
-    #             print(f"Saved mask and overlay for {item['label']} to {output_dir}")
-    #     except Exception as e:
-    #         print(f"Error: {e}")
-    
     
     def extract_segmentation_masks(self, prompt=None, output_dir="segmentation_results"):
         try:
@@ -253,8 +200,7 @@ class ImageProcessor:
         Extracts the first JSON array or object from a model output,
         even if there is extra text around it.
         """
-        import json
-        import re
+
 
         # Remove markdown code fences if present
         json_output = re.sub(r"```(json)?", "", json_output, flags=re.IGNORECASE).strip()
