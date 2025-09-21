@@ -27,13 +27,13 @@ SYSTEM_MESSAGE = f"""You are an AI that determines the best function to call bas
 
 ```json
 [
-   {{
-     "name": "function_name_here",
-     "parameters": {{
-         "arg1": "value1",
-         "arg2": "value2"
-     }}
-   }}
+    {{
+    "name": "<function_name>",
+        "arguments": {{
+            "arg1": "<value1>",
+            "arg2": "<value2>"
+        }}
+    }}
 ]
 ```
 
@@ -63,14 +63,26 @@ class LocalFunctionCall:
 
     def _parse_tool_calls(self, response: str) -> Union[list, None]:
         try:
+            # Remove markdown fences
+            response = response.replace("```json", "").replace("```", "").strip()
+            
+            # Extract JSON-like part
             match = re.search(r'\[.*?\]', response, re.DOTALL)
-            return json.loads(match.group(0)) if match else None
+            if not match:
+                return None
+            
+            json_str = match.group(0)
+            
+            # Replace double braces with single braces
+            json_str = json_str.replace("{{", "{").replace("}}", "}")
+            
+            # Parse JSON
+            return json.loads(json_str)
+        
         except json.JSONDecodeError as e:
-            print(f"Error in formatting JSON: \n{e}")
+            print(f"Error parsing JSON: {e}\nOriginal string:\n{json_str}")
             return None
-        except Exception as e:
-            print(f"Unexpected error: \n{e}")
-            return None
+
 
     def create_function_call(self, user_query: str) -> Union[list, None]:
         try:

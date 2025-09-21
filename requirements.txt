@@ -54,7 +54,7 @@ fonttools==4.57.0
 frozenlist==1.5.0
 fsspec==2025.2.0
 fuzzywuzzy==0.18.0
-genai==2.1.0
+#genai==2.1.0
 geographiclib==2.0
 geopy==2.4.1
 gitdb==4.0.12
@@ -136,7 +136,7 @@ oauthlib==3.2.2
 olefile==0.47
 ollama==0.4.7
 onnxruntime==1.19.2
-openai==0.27.10
+#openai==0.27.10
 opencv-python-headless==4.11.0.86
 openpyxl==3.1.5
 opentelemetry-api==1.30.0
@@ -176,9 +176,8 @@ pydantic-settings==2.7.1
 pydantic_core==2.27.2
 pydeck==0.9.1
 Pygments==2.19.1
-pynput==1.7.7
-pyobjc-core==9.0.1 ; sys_platform == "darwin"
-pyobjc-framework-Cocoa==9.0.1 ; sys_platform == "darwin"
+pyobjc-core==11.1 ; sys_platform == "darwin"
+pyobjc-framework-Cocoa==11.1 ; sys_platform == "darwin"
 pyparsing==3.2.1
 pypdf==5.3.0
 pypdfium2==4.30.1
@@ -227,7 +226,6 @@ sympy==1.13.1
 tabulate==0.9.0
 tenacity==9.0.0
 tifffile==2024.8.30
-tiktoken==0.3.3
 tokenizers==0.21.0
 toml==0.10.2
 tomli==2.2.1

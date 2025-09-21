@@ -22,12 +22,17 @@ def speak(text:str) -> None:
         # Set the voice
         try:
             voices = engine.getProperty('voices')
+            
+            # print("Available Voices on macOS:")
+            # for idx, v in enumerate(voices):
+            #     print(f"{idx}: Name: {v.name}, ID: {v.id}, Languages: {v.languages}")
+            
             choice = randint(0,1)
-            if len(voices) > 15: 
+            if len(voices) >= 99: 
                 if choice == 1:
-                    engine.setProperty('voice', voices[93].id)  # Set the voice by index
+                    engine.setProperty('voice', voices[99].id)  # Set the voice by index
                 else:
-                    engine.setProperty('voice', voices[15].id)
+                    engine.setProperty('voice', voices[99].id)
             else:
                 engine.setProperty('voice', voices[0].id)
         except Exception as e:

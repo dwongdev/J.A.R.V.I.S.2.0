@@ -32,8 +32,6 @@ def text_to_speech_local(text, lang="en"):
 
     return audio_base64 
 
-
-
 if __name__ == "__main__":
     audio_io = text_to_speech_local("hello how are you.")
     print(audio_io)
