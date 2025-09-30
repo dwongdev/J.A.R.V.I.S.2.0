@@ -21,7 +21,9 @@ from src.BRAIN.chat_with_ai import PersonalChatAI
 from src.CONVERSATION.text_speech import text_to_speech_local
 from src.CONVERSATION.voice_text import voice_to_text
 from src.BRAIN.code_gen import CodeRefactorAssistant
-from src.VISION.eye import ImageProcessor  # <-- your image class
+from src.VISION.gem_eye import ImageProcessor  
+from src.VISION.local_eye import LocalImageProcessor
+
 
 # # ----- Torch fix -----
 if hasattr(torch.classes, '__path__'):
@@ -179,7 +181,11 @@ if st.session_state.chat_mode == "data_analysis":
 if st.session_state.chat_mode == "image_processing":
     st.sidebar.markdown("### 🖼️ Image Input")
     image_source = st.sidebar.radio("Image Source", ["Upload", "URL", "Camera"])
-    processor = ImageProcessor()
+    try:
+        processor = ImageProcessor()
+    except Exception as e:
+        processor = LocalImageProcessor()
+        
     if image_source == "Upload":
         uploaded_img = st.sidebar.file_uploader("Upload Image", type=["png","jpg","jpeg"])
         if uploaded_img:
@@ -204,7 +210,7 @@ if st.session_state.chat_mode == "image_processing":
                 st.image(captured, caption="Captured Image")
 
     st.session_state.image_action = st.sidebar.selectbox(
-        "Select Action", ["Basic Detection", "Object Detection", "Segmentation", "Resize"]
+        "Select Action", ["Basic Detection", "Object Detection", "Segmentation"]
     )
 
 # ----- Current Mode Display -----
@@ -267,11 +273,6 @@ if user_input := st.chat_input("Ask me anything... "):
                         "image": None
                     })
                     response = "Segmentation failed or no objects detected."
-
-                #response = "Segmentation masks saved in `segmentation_results/`."
-            elif action == "Resize":
-                success = processor.resize_image()
-                response = f"Image resized to {processor.require_width}x{processor.require_height}" if success else "Resize failed."
     else:
         response = process_command(user_input)
 

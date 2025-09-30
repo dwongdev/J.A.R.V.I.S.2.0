@@ -66,6 +66,7 @@ Before running the project, ensure you have the following installed:
   Chat_model="granite3.1-dense:2b"
   Function_call_model="gemma3:4b"
   Text_to_info_model="gemma3:4b"
+  Image_to_text="llava:7b"
   Embedding_model="nomic-embed-text"
   genai_key=""
   Sender_email="ganeshnikhil124@gmail.com"
